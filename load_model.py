@@ -4,14 +4,14 @@ from omegaconf import DictConfig
 from typing import cast
 import sys 
 import os
-sys.path.append(os.path.abspath("../monarch/dnam2/bert/"))
+sys.path.append(os.path.abspath("../dnam2/bert/"))
 
 from main import build_model
 import src.create_bert as bert_module
 import src.create_model as model_module
 from transformers import AutoTokenizer, Trainer, TrainingArguments
 
-def load_model(model_path = "../monarch/dnam2/bert/slurm/composer/local-bert-checkpoints/lrcorrect__monarch-mixer-pretrain-786dim-80m-parameters/ep39-ba200000-rank0.pt"):
+def load_model(model_path = "../dnam2/bert/slurm/composer/local-bert-checkpoints/lrcorrect__monarch-mixer-pretrain-786dim-80m-parameters/ep39-ba200000-rank0.pt"):
     MODEL_PATH = model_path
     state_dict = torch.load(MODEL_PATH)
     state_dict = state_dict["state"]["model"]
@@ -21,7 +21,7 @@ def load_model(model_path = "../monarch/dnam2/bert/slurm/composer/local-bert-che
 
 
 
-    yaml_path = "../monarch/dnam2/bert/yamls/pretrain/micro_dna_monarch-mixer-pretrain-786dim-80m-parameters.yaml"
+    yaml_path = "../dnam2/bert/yamls/pretrain/micro_dna_monarch-mixer-pretrain-786dim-80m-parameters.yaml"
 
     tokenizer = AutoTokenizer.from_pretrained("gagneurlab/SpeciesLM", revision="downstream_species_lm")
 
