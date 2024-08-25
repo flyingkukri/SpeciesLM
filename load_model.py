@@ -11,17 +11,15 @@ import src.create_bert as bert_module
 import src.create_model as model_module
 from transformers import AutoTokenizer, Trainer, TrainingArguments
 
-def load_model(model_path = "../dnam2/bert/slurm/composer/local-bert-checkpoints/lrcorrect__monarch-mixer-pretrain-786dim-80m-parameters/ep39-ba200000-rank0.pt"):
+def load_model(model_path = "../dnam2/bert/slurm/composer/local-bert-checkpoints/lrcorrect__monarch-mixer-pretrain-786dim-80m-parameters/ep39-ba200000-rank0.pt",
+              yaml_path = "../dnam2/bert/yamls/pretrain/micro_dna_monarch-mixer-pretrain-786dim-80m-parameters.yaml"):
     MODEL_PATH = model_path
     state_dict = torch.load(MODEL_PATH)
     state_dict = state_dict["state"]["model"]
     state_dict_without_prefix = {k.replace('model.', ''): v for k, v in state_dict.items()}
 
 
-
-
-
-    yaml_path = "../dnam2/bert/yamls/pretrain/micro_dna_monarch-mixer-pretrain-786dim-80m-parameters.yaml"
+    
 
     tokenizer = AutoTokenizer.from_pretrained("gagneurlab/SpeciesLM", revision="downstream_species_lm")
 
